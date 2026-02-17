@@ -42,6 +42,7 @@ app.use(
       "http://localhost:5500",
       "https://eskeadmast.github.io",
       "https://foreclosuremanagement.netlify.app",
+      "https://ped-foreclosure.vercel.app/",
     ],
     credentials: true,
   }),
