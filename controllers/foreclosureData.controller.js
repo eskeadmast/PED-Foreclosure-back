@@ -1,7 +1,7 @@
-const ForeclosureData = require('../models/foreclosureData.model');
-const factory = require('./handlerFactory');
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
+const ForeclosureData = require("../models/foreclosureData.model");
+const factory = require("./handlerFactory");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
 exports.createNewForeclosureData = catchAsync(async (req, res, next) => {
   const newForeclosureData = await ForeclosureData.create({
@@ -16,7 +16,7 @@ exports.createNewForeclosureData = catchAsync(async (req, res, next) => {
   //   const safeUser = newForeclosureData.toObject();
 
   res.status(201).json({
-    status: 'success',
+    status: "success",
 
     data: {
       data: newForeclosureData,
@@ -34,9 +34,9 @@ exports.updateForeclosureData = catchAsync(async (req, res, next) => {
     { new: true, runValidators: true },
   );
   if (!updated) {
-    return next(new AppError('No foreclosure record found with that ID', 404));
+    return next(new AppError("No foreclosure record found with that ID", 404));
   }
-  res.status(200).json({ status: 'success', data: { data: updated } });
+  res.status(200).json({ status: "success", data: { data: updated } });
 });
 // exports.createNewForeclosureData = factory.createOne(ForeclsdureData);
 
@@ -47,15 +47,15 @@ exports.getAllForeclosureData = factory.getAll(ForeclosureData);
 exports.deleteForeclosureData = factory.deleteOne(ForeclosureData);
 exports.getOneForeclosureData = catchAsync(async (req, res, next) => {
   const foreclosure = await ForeclosureData.findById(req.params.id).populate(
-    'users',
+    "users",
   );
 
   if (!foreclosure) {
-    return next(new AppError('No foreclosure data found wit that ID', 404));
+    return next(new AppError("No foreclosure data found wit that ID", 404));
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       foreclosure,
     },

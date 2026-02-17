@@ -1,17 +1,17 @@
-const express = require('express');
-const foreclosureDataController = require('../../controllers/foreclosureData.controller');
-const authController = require('../../controllers/auth.controller');
+const express = require("express");
+const foreclosureDataController = require("../controllers/foreclosureData.controller");
+const authController = require("../controllers/auth.controller");
 const router = express.Router();
 
 router
-  .route('/')
+  .route("/")
   .get(authController.protect, foreclosureDataController.getAllForeclosureData)
   .post(
     authController.protect,
     foreclosureDataController.createNewForeclosureData,
   );
 router
-  .route('/:id')
+  .route("/:id")
   .get(authController.protect, foreclosureDataController.getOneForeclosureData)
   .patch(
     authController.protect,
@@ -19,7 +19,7 @@ router
   )
   .delete(
     authController.protect,
-    authController.restrictTo('admin', 'senior'),
+    authController.restrictTo("admin", "senior"),
     foreclosureDataController.deleteForeclosureData,
   );
 module.exports = router;
