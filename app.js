@@ -31,9 +31,15 @@ const limiter = rateLimit({
 });
 app.use("/api", limiter);
 
+const cors = require("cors");
+
 app.use(
   cors({
-    origin: ["https://foreclosuremanagement.netlify.app"],
+    origin: [
+      "http://127.0.0.1:5500",
+      "http://localhost:5500",
+      "https://eskeadmast.github.io",
+    ],
     credentials: true,
   }),
 );
