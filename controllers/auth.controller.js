@@ -73,7 +73,6 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   //    2)check if the user exists && Password is correct
   const user = await User.findOne({ username }).select("+password");
-  console.log(user);
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError("Incorrect email or password", 401));
