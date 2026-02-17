@@ -80,6 +80,9 @@ app.use(
 
 // serving static files
 // app.use(express.static());
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Backend is running!" });
+});
 
 app.use("/api/v1/foreclosures", foreclosureDataRouter);
 app.use("/api/v1/users", userRouter);
