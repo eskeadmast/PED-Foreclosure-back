@@ -8,7 +8,7 @@ const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
 
-const globalErrorHandler = require("../controllers/errorControllers");
+const globalErrorHandler = require("./controllers/errorControllers");
 const foreclosureDataRouter = require("./routes/foreclosureData.route");
 const userRouter = require("./routes/user.routes");
 const AppError = require("./utils/appError");
