@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Parcel / Build tool caches
+.parcel-cache/
+dist/
+.cache/
+
+# Environment / Config files (Security)
+.env
+config.json
+.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
