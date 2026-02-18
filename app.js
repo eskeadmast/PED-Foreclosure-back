@@ -41,22 +41,27 @@ const allowedOrigins = [
   "https://eskeadmast.github.io",
   "https://foreclosuremanagement.netlify.app",
   "https://ped-foreclosure.vercel.app",
+  "https://ped-foreclosure-back.onrender.com",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      if (!origin) return callback(null, true); // allow Postman or server-to-server
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
       }
+      return callback(null, true);
     },
-    credentials: true,
+    credentials: true, // IMPORTANT for cookies
   }),
 );
 
-app.options("*", cors());
+// Enable OPTIONS preflight for all routes
+app.options("*", cors({ origin: allowedOrigins, credentials: true }));
+
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
 
