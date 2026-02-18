@@ -21,8 +21,9 @@ const cookieOptions = {
       (Number(process.env.JWT_COOKIE_EXPIRES_IN) || 90) * 24 * 60 * 60 * 1000,
   ),
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  // secure: process.env.NODE_ENV === "production",
+  // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  path: "/",
 };
 
 const createSendToken = (user, statusCode, res) => {

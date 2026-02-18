@@ -35,19 +35,27 @@ const limiter = rateLimit({
   message: `Too many request from this IP, please try again in an hour!`,
 });
 app.use("/api", limiter);
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://eskeadmast.github.io",
+  "https://foreclosuremanagement.netlify.app",
+  "https://ped-foreclosure.vercel.app",
+];
 
 app.use(
   cors({
-    origin: [
-      "http://127.0.0.1:5500",
-      "http://localhost:5500",
-      "https://eskeadmast.github.io",
-      "https://foreclosuremanagement.netlify.app",
-      "https://ped-foreclosure.vercel.app",
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
+
 app.options("*", cors());
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
