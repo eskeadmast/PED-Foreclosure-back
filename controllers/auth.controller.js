@@ -16,21 +16,20 @@ const days = Number(process.env.JWT_COOKIE_EXPIRES_IN) || 90;
 if (isNaN(days)) throw new Error("JWT_COOKIE_EXPIRES_IN must be a number");
 
 const cookieOptions = {
+  expires: new Date(
+    Date.now() +
+      (Number(process.env.JWT_COOKIE_EXPIRES_IN) || 90) * 24 * 60 * 60 * 1000,
+  ),
   httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge:
-    (Number(process.env.JWT_COOKIE_EXPIRES_IN) || 90) * 24 * 60 * 60 * 1000,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 };
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
 
   // create and send cookies
-  if (process.env.NODE_ENV === "production") {
-    cookieOptions.secure = true;
-    cookieOptions.sameSite = "none";
-  }
+
   res.cookie("jwt", token, cookieOptions);
 
   const safeUser = user.toObject();

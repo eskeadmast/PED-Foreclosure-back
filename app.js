@@ -44,12 +44,11 @@ app.use(
       "https://eskeadmast.github.io",
       "https://foreclosuremanagement.netlify.app",
       "https://ped-foreclosure.vercel.app",
-      "https://ped-foreclosure-back.onrender.com",
     ],
     credentials: true,
   }),
 );
-
+app.options("*", cors());
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: "10kb" }));
 
