@@ -14,6 +14,7 @@ const userRouter = require("./routes/user.routes");
 const AppError = require("./utils/appError");
 
 const app = express();
+app.set("trust proxy", 1);
 
 // GLOBAL MIDDLEWARES
 // set security HTTP headers
@@ -43,6 +44,7 @@ app.use(
       "https://eskeadmast.github.io",
       "https://foreclosuremanagement.netlify.app",
       "https://ped-foreclosure.vercel.app",
+      "https://ped-foreclosure-back.onrender.com",
     ],
     credentials: true,
   }),
